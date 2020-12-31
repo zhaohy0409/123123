@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .a{
+            color: red;
+        /*}*/
+        /*#txt{*/
+        /*    float: right;*/
+        /*}*/
+        /**{*/
+        /*    width: 450px;*/
+        /*    float: left;*/
+        /*}*/
+        /*.all{*/
+        /*    width: 1000px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="app" class="all">
+    <h3>姓名：{{usernaem[0]}},年龄：{{age}},来自于{{come_from[0].province}}省{{come_from[0].city}}市</h3>
+    <h3>姓名：{{usernaem[1]}},年龄：{{age+1}},来自于{{come_from[1].province}}省{{come_from[1].city}}市</h3>
+    <h3>姓名：{{usernaem[2]}},年龄：{{age-4}},来自于{{come_from[2].province}}省{{come_from[2].city}}市</h3>
+    <h3>姓名：{{usernaem[3]}},年龄：{{age*2}},来自于{{come_from[3].province}}省{{come_from[3].city}}市</h3>
+    <h3>姓名：{{usernaem[4]}},年龄：{{age/0.75}},来自于{{come_from[4].province}}省{{come_from[4].city}}市</h3>
+    <span v-text="text1">圣诞快乐</span>
+    <span v-text="html1"></span><br>
+    <span v-show>{{mgs}}</span>
+    <input type="button" value="点击增加" v-on:click="change_mgs">
+    <input type="button" value="点击减少" @click="change_low_mgs">
+    <h1 :v-if="xianshi2" v-bind:class="{a:xianshi1}">你好</h1>
+    <h3 v-else>你还好</h3>
+    <input type="button" value="切换颜色" @click="y_xinashi">
+    <input type="button" value="点击切换2" @click="n_xianshi">
+    <ul>
+        <li v-for="(value,index) in come_from">
+            {{value}}------{{index}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(a,b,c) in come_from[0]" :key="c">
+            {{a}}---{{b}}----{{c}}<br>
+            {{c}}---{{b}}----{{a}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="pyc in come_from">
+            {{pyc.province}}------{{pyc.city}}
+        </li>
+    </ul>
+    <div id="txt">
+        <input type="text" v-model="text2">
+        <h2>{{text2}}</h2>
+    </div>
+
+
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            usernaem:["赵昊宇","李丽","张三","李四","王五"],
+            age:23,
+            come_from:[
+                {province:"宁夏回族自治区",city:"银川市"},
+                {province:"甘肃省",city:"兰州市"},
+                {province:"陕西省",city:"西安市"},
+                {province:"四川省",city:"成都市"},
+                {province:"河北省",city:"石家庄市"},
+            ],
+            html1:'<a href="">百度百科</a>',
+            text1:'merry christmas',
+            mgs:1,
+            xianshi1:true,
+            xianshi2:true,
+            text2:""
+        },
+        methods:{
+            change_mgs:function () {
+                this.mgs++;
+            },
+            change_low_mgs () {
+                this.mgs--;
+            },
+            y_xinashi(){
+                this.xianshi1 = ! this.xianshi1
+            },
+            n_xianshi(){
+                this.xianshi2 = !this.xianshi2
+            }
+        },
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div id="app">-->
+<!--    <input type="text" v-model="text1">-->
+<!--    <input type="button" value="发表" @click="add_text">-->
+<!--    <hr>-->
+<!--    <lu>-->
+<!--        <li v-for="(val,inx) in all_text">-->
+<!--            {{val}}&#45;&#45;&#45;&#45;&#45;&#45;{{inx}}-->
+<!--        </li>-->
+<!--    </lu>-->
+<!--</div>-->
+<div id="app">
+    <input type="text" v-model="text">
+    <input type="button" value="发表" @click="add_text">
+    <ul>
+        <li v-for="(val,inx) in all_text">
+            <span>{{val}}</span> <a href="javascript:;" @click="deltext(inx)">删除</a>
+        </li>
+    </ul>
+
+    <span>总数量：{{all_text.length}}条</span>
+    <input type="button" value="清空" @click="delAll" v-show="all_text.length!=0">
+
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            text:"",
+            all_text:[],
+        },
+        methods:{
+            add_text(){
+                // this.all_text.push(this.text);
+                let text=this.text;
+                if(text){
+                    this.all_text.unshift(this.text);
+                }
+                this.text="";
+            },
+            deltext(inx){
+                this.all_text.splice(inx,1)
+            },
+            delAll() {
+                this.all_text = [];
+            },
+        }
+    })
+
+
+
+
+    // new Vue({
+    //     el: "#app",
+    //     data:{
+    //         text1:"",
+    //         all_text:[],
+    //     },
+    //     method:{
+    //         add_text(){
+    //             this.all_text.push(text1)
+    //         }
+    //     }
+    // })
+</script>
+</body>
+</html>
