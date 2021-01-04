@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div id="A">-->
+<!--    <holle></holle><br>-->
+<!--    <holle></holle><br>-->
+<!--    <holle></holle><br>-->
+<!--    <holle></holle><br>-->
+<!--    <input type="text" v-model="num" id="a2"><br>-->
+<!--    <hr>-->
+<!--    <span id="a1">{{num}}</span>-->
+<!--    <dame1 :d_1="num"></dame1>-->
+
+<!--</div>-->
+
+<div id="B">
+    <dame2 name="我是子组件111" @a3="a3all"></dame2><br>
+    <dame2 name="我是子组件222" @a3="a3all"></dame2><br>
+    <dame2 name="我是子组件333" @a3="a3all"></dame2><br>
+    <dame2 name="我是子组件444" @a3="a3all"></dame2><br>
+    <dame2 name="我是子组件555" @a3="a3all"></dame2><br>
+    <dame2 name="我是子组件666" @a3="a3all"></dame2><br>
+    <span>我是父组件接受----{{names}}</span>
+</div>
+
+
+<div id="dame3">
+    <h2>第三个dame页头</h2>
+    <hr>
+    <router-link to="/one">一页面</router-link>
+    <router-link to="/tow">二页面</router-link>
+    <hr>
+    <router-view></router-view>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script>
+    let first={
+        template: `<div>页面一，11111111111111111111</div>`,
+    };
+    let second={
+        template: `<div>页面二，22222222222222222222</div>`,
+    };
+    let all_page = new VueRouter({
+        routes:[
+            {path:"/one",component:first},
+            {path:"/tow",component:second},
+        ]
+    })
+    new Vue({
+        el:"#dame3",
+        data:{},
+        components:{
+            first:first,
+            second:second,
+        },
+        router:all_page
+    })
+    // let dame={
+    //     template:`<a href="#">{{num}}</a>`,
+    //     data:function (){
+    //         return {
+    //             num:"Tom",
+    //         }
+    //     }
+    // };
+    // Vue.component("holle",dame)
+    //
+    // let dame1={
+    //     template: `
+    //       <div>
+    //       局部组件
+    //       <span>父组件传递的参事-----{{ d_1 }}</span>
+    //       </div>
+    //     `,
+    //     props:["d_1"],
+    // }
+    //
+    // new Vue({
+    //     el:"#A",
+    //     data:{
+    //         num:"还没写",
+    //     },
+    //     beforeCreate:function (){
+    //         console.log("beforeCreate:"+this.num);
+    //     },
+    //     created:function () {
+    //         console.log("created:" + this.num);
+    //     },
+    //     beforeMount:function () {
+    //         console.log("beforeMount:" + this.num);
+    //     },
+    //     mounted:function (){
+    //         console.log("mounted:"+this.num);
+    //     },
+    //     beforeUpdate:function () {
+    //         console.log("beforeUpdate:"+this.num);
+    //         console.log("beforeUpdate:"+document.getElementById("a1").innerText);
+    //     },
+    //     updated:function () {
+    //         console.log("updated:"+this.num);
+    //         console.log("updated:"+document.getElementById("a1").innerText);
+    //     },
+    //     beforeDestroy:function () {
+    //
+    //     },
+    //     destroyed:function () {
+    //
+    //     },
+    //     components: {
+    //         "dame1": dame1,
+    //     }
+    // })
+    let dame2={
+        template:`<a href="#" @click="aaa">{{name}}</a>`,
+        methods:{
+          aaa(){
+              this.$emit("a3",this.name)
+          }
+        },
+        props: ['name'],
+        data: function (){
+            return {
+                nameaa:"111111111"
+            }
+        }
+    }
+    new Vue({
+        el:"#B",
+        data:{
+            names:"无"
+        },
+        methods: {
+            a3all(nameaa){
+                this.names=nameaa;
+            },
+        },
+        components: {
+            dame2:dame2
+        },
+    })
+    // let txtunm=document.getElementById("a1").innerText;
+    // let num = x => console.log(x);
+    // num(txtunm);
+    // let num1=(x,y) => console.log(x+y);
+    // num1(21,15);
+    // let num2 = (x,y) => x+y;
+    // console.log(num2(2,3));
+    // let num3 =() => console.log(123);
+    // let num4 = a => a*2;
+    // console.log(num4(6));
+    // let unm5= {
+    //     numone:13,
+    //     app:function (){
+    //         setTimeout(()=>{
+    //             console.log(this.numone)
+    //         })
+    //     }
+    // }
+    // unm5.app()
+
+</script>
+</body>
+</html>
